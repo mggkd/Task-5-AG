@@ -1,0 +1,25 @@
+<div class="container">
+    <h2>Welcome to the Dashboard</h2>
+    <h3>Hello, {{ username }}</h3>
+  
+    <!-- For HOD -->
+    <div *ngIf="isHOD">
+      <h4>Leaves Applied by Staff</h4>
+      <div *ngFor="let leave of leaves">
+        <p>Staff: {{ leave.staffName }}</p>
+        <p>Date(s): {{ leave.date }}</p>
+        <button (click)="approveLeave(leave)">Approve</button>
+        <button (click)="rejectLeave(leave)">Reject</button>
+      </div>
+    </div>
+  
+    <!-- For Staff -->
+    <div *ngIf="!isHOD">
+      <h4>Your Leave Applications</h4>
+      <div *ngFor="let leave of leaves">
+        <p>Date(s): {{ leave.date }}</p>
+        <p>Status: {{ leave.status }}</p>
+      </div>
+    </div>
+  </div>
+  
