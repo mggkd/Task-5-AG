@@ -1,0 +1,62 @@
+.container {
+    margin-top: 2rem;
+}
+
+.card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+
+.card-status {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #3182ce;
+    text-transform: uppercase;
+}
+
+.card-status.approved {
+    color: #38a169;
+}
+
+.card-status.rejected {
+    color: #e53e3e;
+}
+
+.card-empty {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    color: #718096;
+}
+
+.card-empty button {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4a90e2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.card-leave .card-title {
+    color: #2d3748;
+}
+
+.card-leave .card-status {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.apply-btn btn {
+    width: 50%;
+    height: 100%;
+    padding: 0;
+}

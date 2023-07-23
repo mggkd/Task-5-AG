@@ -1,0 +1,48 @@
+.leaveForm {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 2rem;
+    margin-top: 5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dateFormat {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+input {
+    flex: 1;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: vertical;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.leaveBtn {
+    float: right;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.leaveBtn:hover {
+    color: #007bff;
+}

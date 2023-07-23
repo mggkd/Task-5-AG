@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center m-0">HOD Dashboard</h2>
+      <h2 class="text-center text-uppercase">({{currentHodDept}})</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let leave of leaveDataList">
+      <div class="card mb-3">
+        <h2 class="card-header">Leave Dates:  {{ leave.startDate | date: 'shortDate' }} || to || {{ leave.endDate | date: 'shortDate'}}</h2>
+        <div class="card-body">
+          <p class="card-text">Reason: {{ leave.reason }}</p>
+          <p class="card-text">
+            Applied by: {{ leave.appliedBy }} <!-- Display the staff name here -->
+          </p>
+          <p class="card-text">
+            Status:
+            <span [ngClass]="{'text-success': leave.status === 'Approved', 'text-danger': leave.status === 'Rejected', 'text-secondary': leave.status === 'Pending'}">
+              {{ leave.status }}
+            </span>
+          </p>
+        </div>
+        <div class="card-footer">
+          <div *ngIf="leave.status === 'Pending'">
+            <button class="btn btn-success" (click)="approveLeave(leave)">Approve</button>
+            <button class="btn btn-danger" (click)="rejectLeave(leave)">Reject</button>
+          </div>
+          <div *ngIf="leave.status !== 'Pending'">
+            <button class="btn btn-secondary" [disabled]="true">{{ leave.status }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

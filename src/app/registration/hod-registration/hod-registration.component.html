@@ -1,0 +1,45 @@
+<form [formGroup]="hodForm" (ngSubmit)="onSubmit()" class="hod">
+  <div class="form-row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="firstName" class="col-form-label">First Name:</label>
+        <input type="text" class="form-control" id="firstName" formControlName="firstName">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="lastName" class="col-form-label">Last Name:</label>
+        <input type="text" class="form-control" id="lastName" formControlName="lastName">
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email" class="col-form-label">Email ID:</label>
+    <input type="email" class="form-control" id="email" formControlName="email">
+  </div>
+  <div class="form-group">
+    <label for="contact" class="col-form-label">Contact No.:</label>
+    <input type="text" class="form-control" id="contact" formControlName="contact">
+  </div>
+  <div class="form-group hodShow">
+    <label for="department">Department:</label>
+    <select class="form-control" id="department" formControlName="department">
+      <option disabled selected>Choose Department</option>
+      <option value="mech">Mechanical</option>
+      <option value="etc">Electronics and Telecommunication</option>
+      <option value="it">Information Technology</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="userName" class="col-form-label">Username:</label>
+    <input type="email" class="form-control" id="userName" formControlName="userName">
+  </div>
+  <div class="form-group">
+    <label for="password" class="col-form-label">Password:</label>
+    <input type="password" class="form-control" id="password" formControlName="password">
+  </div>
+  <button type="submit" class="btn btn-success mb-4 regisBtn">Register</button>
+  <div class="d-flex">
+    <h3>Already Registered? <a routerLink="/login">Login</a></h3>
+  </div>
+</form>

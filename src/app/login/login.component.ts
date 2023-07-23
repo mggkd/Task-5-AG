@@ -1,57 +1,50 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  loginForm: FormGroup;
-  submitted: boolean = false;
-  invalidLogin: boolean = false;
+export class LoginComponent implements OnInit {
+  loginFormObj: FormGroup | any;
 
-  users = [
-    { username: 'admin', password: 'password', role: 'HOD' },
-    { username: 'user1', password: 'password1', role: 'Employee' },
-    { username: 'user2', password: 'password2', role: 'Employee' },
-    // Add more users as needed
-  ];
+  constructor(private authService: AuthService, private router: Router) { }
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+  ngOnInit(): void {
+    this.loginFormObj = new FormGroup({
+      userName: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     });
   }
 
-  login() {
-    this.submitted = true;
+  onSubmit() {
+    console.log(this.loginFormObj.value);
 
-    if (this.loginForm.invalid) {
-      return;
-    }
+    const { userName, password } = this.loginFormObj.value;
 
-    const username = this.loginForm.value.username;
-    const password = this.loginForm.value.password;
+    this.authService.login(userName, password).subscribe(
+      (user: any) => {
+        console.log('Login successful:', user);
+        const userPosition = user.position.toLowerCase(); 
+        const allowedRole = 'hod';
 
-    const user = this.users.find(u => u.username === username && u.password === password);
+        if (userPosition === allowedRole.toLowerCase()) { 
+          this.router.navigate(['/hod-dashboard']);
+        } else if (userPosition === 'staff') {
+          this.router.navigate(['/staff-dashboard']);
+        } else {
+          console.log('Unknown user position');
+        }
+      },
+      (error: any) => {
+        console.log('Authentication error:', error);
+      }
+    );
 
-    if (user) {
-      // Valid credentials, navigate to the dashboard
-      this.router.navigate(['/dashboard']);
-
-      // Store the user's role in local storage or state management
-      localStorage.setItem('userRole', user.role);
-    } else {
-      // Invalid credentials, display error message
-      this.invalidLogin = true;
-    }
+    this.loginFormObj.reset();
   }
 
-  goToRegistration() {
-    // Navigate to the registration form route
-    this.router.navigate(['/registration']);
-  }
 }

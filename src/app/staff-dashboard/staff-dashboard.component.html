@@ -1,0 +1,77 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-10">
+      <h2 class="text-center mb-4">STAFF DASHBOARD</h2>
+    </div>
+    <div class="col-2">
+      <div *ngIf="leaveDataList.length !== 0">
+        <div class="card apply-btn">
+          <button class="btn btn-primary btn-block btn-apply-leave" routerLink="/leave-application-form"> Apply Leave</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-3">
+      <div class="card summary-card">
+        <h4 class="card-header">Total Leaves</h4>
+        <div class="card-body">
+          <h2 class="card-text">{{ leaveDataList.length }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card summary-card">
+        <h4 class="card-header">Approved Leaves</h4>
+        <div class="card-body">
+          <h2 class="card-text">{{ getLeavesByStatus('Approved').length }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card summary-card">
+        <h4 class="card-header">Rejected Leaves</h4>
+        <div class="card-body">
+          <h2 class="card-text">{{ getLeavesByStatus('Rejected').length }}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card summary-card">
+        <h4 class="card-header">Pending Leaves</h4>
+        <div class="card-body">
+          <h2 class="card-text">{{ getLeavesByStatus('Pending').length }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card card-empty text-center py-4" *ngIf="leaveDataList.length === 0">
+        <p class="text-danger mb-0">You have not applied for any leaves yet.</p>
+        <button class="btn btn-primary mt-2 btn-apply-leave" routerLink="/leave-application-form"> Apply Leave</button>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-4" *ngFor="let leave of leaveDataList">
+          <div class="card card-leave mb-4">
+            <div>
+              <h2 class="card-header mb-3">Leave Dates: {{ leave.startDate | date: 'shortDate' }} || to || {{
+                leave.endDate | date: 'shortDate' }}</h2>
+            </div>
+            <div class="card-body">
+              <p class="card-text">Reason: {{ leave.reason }}</p>
+              <p class="card-text">Duration: {{ calculateLeaveDuration(leave.startDate, leave.endDate) }} days</p>
+            </div>
+            <div>
+              <p class="card-footer card-status mb-0"
+                [ngClass]="{'approved': leave.status === 'Approved', 'rejected': leave.status === 'Rejected'}">Status:
+                {{ leave.status }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
